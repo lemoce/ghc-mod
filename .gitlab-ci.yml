@@ -18,6 +18,7 @@ before_script:
   script:
     - echo $PWD
     - ghc-pkg list
+    - cabal freeze
     - cabal install --user --only-dependencies -j2 --force-reinstalls --upgrade-dependencies --enable-tests --enable-documentation
     - which cabal
     - cabal --version
@@ -29,6 +30,11 @@ before_script:
     - ./dist/build/spec/spec
     - ./dist/build/doctest/doctest
     - cabal haddock
+  artifacts:
+    paths:
+      - cabal.config
+    when: always
+
 
 job-ghc800:
   image: registry.gitlab.com/dxld/ghc-mod:ghc8.0.2-cabal-install1.24.0.2
