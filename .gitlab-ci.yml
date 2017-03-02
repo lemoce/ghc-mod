@@ -3,9 +3,10 @@ stages:
 
 before_script:
   - ls -l ..
-  - apt-get -q update
-  - apt-get -q install -y alex happy
   - cabal update
+  - cabal install alex
+  - cabal install happy
+  - rm -rf ~/.cabal ~/.ghc
   - mkdir -p ../ghc-mod.sdist
   - touch ChangeLog
   - cabal sdist --output-directory=../ghc-mod.sdist
